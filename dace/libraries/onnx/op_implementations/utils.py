@@ -2,6 +2,7 @@
 import inspect
 import copy
 from typing import Dict, Tuple, Optional, Callable, Union, Any
+import functools
 import textwrap
 
 import dace

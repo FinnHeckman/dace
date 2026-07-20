@@ -10,6 +10,7 @@
         - Pointers are mixed with vectors or scalars
 """
 
+import dace
 import dace.dtypes as dtypes
 from dace.codegen.targets.sve import util as util
 import collections

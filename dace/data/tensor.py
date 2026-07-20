@@ -662,12 +662,11 @@ class Tensor(Structure):
         self.indices, self.index_ordering = list(indices), list(index_ordering)
 
         num_dims = len(tensor_shape)
-        # Only concrete Python/SymPy integers refer to tensor dimensions; symbolic values denote unrelated levels.
-        dimension_order = [int(idx) for idx in index_ordering if isinstance(idx, (int, symbolic.sympy.Integer))]
+        dimension_order = [idx for idx in self.index_ordering if isinstance(idx, int)]
 
-        # all tensor dimensions must occur exactly once in indices
+        # all tensor dimensions must occure exactly once in indices
         if not sorted(dimension_order) == list(range(num_dims)):
-            raise TypeError((f"All tensor dimensions must be referenced exactly once in "
+            raise TypeError((f"All tensor dimensions must be refferenced exactly once in "
                              f"tensor indices. (referenced dimensions: {dimension_order}; "
                              f"tensor dimensions: {list(range(num_dims))})"))
 

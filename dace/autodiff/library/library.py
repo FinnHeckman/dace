@@ -4,11 +4,12 @@ Dace library for autodiff
 
 Includes the BackwardPass library node, and the replacements for the python frontend
 """
-from typing import Dict, Set
+from typing import Dict, Set, Optional
+import copy
 
 import dace
 import dace.library
-from dace import properties
+from dace import data, properties
 from dace.transformation import transformation as pm
 from dace.sdfg import SDFG, SDFGState, graph, nodes
 
@@ -18,7 +19,7 @@ from dace.sdfg.utils import in_edge_with_name
 from dace.transformation.passes.analysis import AccessSets
 
 # Import ParameterArray from the data package for backward compatibility
-from dace.data.ml import ParameterArray  # noqa: F401
+from dace.data.ml import ParameterArray
 
 
 @dace.library.expansion

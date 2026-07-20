@@ -4,7 +4,7 @@ import dace.properties
 import dace.sdfg.nodes
 from dace.transformation.transformation import ExpandTransformation
 from .. import environments
-from dace.libraries.mpi.nodes.node import MPINode, validate_integer_descriptor
+from dace.libraries.mpi.nodes.node import MPINode
 
 
 @dace.library.expansion
@@ -33,7 +33,7 @@ class ExpandSendMPI(ExpandTransformation):
             count_str = "1"
         buffer_offset = 0
         code += f"""
-                MPI_Send(&(_buffer[{buffer_offset}]), {count_str}, {mpi_dtype_str}, int(_dest), int(_tag), MPI_COMM_WORLD);
+                MPI_Send(&(_buffer[{buffer_offset}]), {count_str}, {mpi_dtype_str}, _dest, _tag, MPI_COMM_WORLD);
                 """
         if ddt is not None:
             code += f"""// MPI_Type_free(&newtype);
@@ -81,8 +81,10 @@ class Send(MPINode):
             if e.dst_conn == "_tag":
                 tag = sdfg.arrays[e.data.data]
 
-        validate_integer_descriptor(dest, 'Destination')
-        validate_integer_descriptor(tag, 'Tag')
+        if dest.dtype.base_type != dace.dtypes.int32:
+            raise ValueError("Source must be an integer!")
+        if tag.dtype.base_type != dace.dtypes.int32:
+            raise ValueError("Tag must be an integer!")
 
         count_str = "XXX"
         for _, _, _, dst_conn, data in state.in_edges(self):

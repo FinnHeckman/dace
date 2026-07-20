@@ -5,7 +5,7 @@ from dace.sdfg import nodes
 from dace.sdfg.graph import SubgraphView
 
 import copy
-from typing import List, Dict
+from typing import List, Dict, Set
 
 # ****************
 # Helper functions

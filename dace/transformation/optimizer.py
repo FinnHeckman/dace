@@ -5,6 +5,7 @@
 import copy
 import os
 import re
+import time
 from typing import Any, Dict, Iterator, List, Optional, Type
 
 import dace
@@ -15,6 +16,7 @@ from dace.transformation.passes import pattern_matching
 from dace.transformation.transformation import PatternTransformation
 
 # This import is necessary since it registers all the patterns
+from dace.transformation import dataflow, interstate, subgraph
 
 
 class Optimizer(object):

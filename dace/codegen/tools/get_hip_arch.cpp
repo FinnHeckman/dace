@@ -1,7 +1,6 @@
 // Copyright 2019-2021 ETH Zurich and the DaCe authors. All rights reserved.
 #include <hip/hip_runtime.h>
 
-#include <cstring>
 #include <iostream>
 #include <set>
 #include <string>

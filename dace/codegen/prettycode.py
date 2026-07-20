@@ -6,7 +6,7 @@ import inspect
 from io import StringIO
 from dace.config import Config
 from dace.sdfg.graph import NodeNotFoundError
-from dace.sdfg.state import ControlFlowRegion
+from dace.sdfg.state import ControlFlowRegion, SDFGState
 
 
 class CodeIOStream(StringIO):

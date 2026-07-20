@@ -3,6 +3,7 @@ import copy
 import dace
 import pytest
 import numpy
+import sys
 from dace.transformation.dataflow.add_threadblock_map import AddThreadBlockMap
 
 N = dace.symbol("N")

@@ -1,5 +1,8 @@
 # Copyright 2019-2025 ETH Zurich and the DaCe authors. All rights reserved.
+import numpy as np
+import pytest
 import dace
+from dace import nodes
 from dace.transformation.interstate import ConditionFusion
 from dace.sdfg.state import ConditionalBlock
 

@@ -1,5 +1,7 @@
 # Copyright 2019-2022 ETH Zurich and the DaCe authors. All rights reserved.
 
+import pytest
+
 import dace
 from dace.sdfg import utils as sdutil
 from dace.transformation.pass_pipeline import Pipeline

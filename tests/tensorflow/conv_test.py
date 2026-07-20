@@ -1,7 +1,6 @@
 # Copyright 2019-2021 ETH Zurich and the DaCe authors. All rights reserved.
 import pytest
 import numpy as np
-from importlib.util import find_spec
 
 
 @pytest.mark.tensorflow
@@ -102,5 +101,8 @@ def test_conv():
 
 
 if __name__ == '__main__':
-    if find_spec("tensorflow"):
+    try:
+        import tensorflow
         test_conv()
+    except ImportError:
+        pass

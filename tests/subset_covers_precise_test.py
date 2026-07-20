@@ -1,5 +1,8 @@
 # Copyright 2019-2023 ETH Zurich and the DaCe authors. All rights reserved.
 
+import pytest
+
+import dace
 from dace.config import Config
 from dace.subsets import Indices, Range
 

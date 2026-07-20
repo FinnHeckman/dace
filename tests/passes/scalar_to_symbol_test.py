@@ -3,8 +3,10 @@
 import dace
 from dace.sdfg.state import ConditionalBlock, LoopRegion
 from dace.transformation.passes import scalar_to_symbol
-from dace.transformation import interstate as isxf
+from dace.transformation import transformation as xf, interstate as isxf
+from dace.transformation.interstate import loop_detection as ld
 
+import collections
 from sympy import core as sympy_core
 import numpy as np
 import pytest

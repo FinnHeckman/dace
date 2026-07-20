@@ -4,6 +4,7 @@ import pytest
 pytest.importorskip("torch", reason="PyTorch not installed. Please install with: pip install dace[ml]")
 import os
 
+import numpy as np
 import torch
 import torch.utils.cpp_extension
 from dace.codegen import targets, compiler
@@ -17,6 +18,8 @@ from tests.utils import torch_tensors_close
 op_source = """
 #include <torch/torch.h>
 #include <torch/script.h>
+
+#include <ATen/NamedTensorUtils.h>
 
 using torch::Tensor;
 using torch::DeviceType;

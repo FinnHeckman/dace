@@ -2,6 +2,7 @@
 """Tests loop overwrite elimination transformations."""
 
 import numpy as np
+import pytest
 import dace
 from dace.transformation.interstate import LoopOverwriteElimination
 from dace.sdfg.state import LoopRegion

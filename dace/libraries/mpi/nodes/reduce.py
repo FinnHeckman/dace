@@ -4,7 +4,7 @@ import dace.properties
 import dace.sdfg.nodes
 from dace.transformation.transformation import ExpandTransformation
 from .. import environments
-from dace.libraries.mpi.nodes.node import MPINode, expanded_input_connectors, input_descriptor_name
+from dace.libraries.mpi.nodes.node import MPINode
 
 
 @dace.library.expansion
@@ -22,17 +22,21 @@ class ExpandReduceMPI(ExpandTransformation):
             raise ValueError("Reduce root must be an integer!")
 
         comm = "MPI_COMM_WORLD"
-        grid = input_descriptor_name(node, parent_state, '_grid')
-        if grid:
-            comm = "_grid"
+        if node.grid:
+            comm = f"__state->{node.grid}_comm"
 
         code = ""
         if in_place:
-            code += f"""
-                int __comm_rank;
-                MPI_Comm_rank({comm}, &__comm_rank);
-                if (__comm_rank == _root) {{
-            """
+            if comm == "MPI_COMM_WORLD":
+                code += """
+                    int __world_rank;
+                    MPI_Comm_rank(&__world_rank, MPI_COMM_WORLD);
+                    if (__world_rank == _root) {{
+                """
+            else:
+                code += f"""
+                    if (__state->{node.grid}_rank == _root) {{
+                """
             code += f"""
                     MPI_Reduce(MPI_IN_PLACE, _outbuffer, {count_str}, {mpi_dtype_str}, {node.op}, _root, {comm});
                 }} else {{
@@ -41,7 +45,7 @@ class ExpandReduceMPI(ExpandTransformation):
         if in_place:
             code += "}"
         tasklet = dace.sdfg.nodes.Tasklet(node.name,
-                                          expanded_input_connectors(node, parent_state),
+                                          node.in_connectors,
                                           node.out_connectors,
                                           code,
                                           language=dace.dtypes.Language.CPP)
@@ -58,10 +62,12 @@ class Reduce(MPINode):
     default_implementation = "MPI"
 
     op = dace.properties.Property(dtype=str, default='MPI_SUM')
+    grid = dace.properties.Property(dtype=str, allow_none=True, default=None)
 
-    def __init__(self, name, op='MPI_SUM', *args, **kwargs):
+    def __init__(self, name, op='MPI_SUM', grid=None, *args, **kwargs):
         super().__init__(name, *args, inputs={"_inbuffer", "_root"}, outputs={"_outbuffer"}, **kwargs)
         self.op = op
+        self.grid = grid
 
     def validate(self, sdfg, state):
         """

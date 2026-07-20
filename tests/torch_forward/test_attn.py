@@ -6,6 +6,7 @@ import torch
 
 from dace.ml import DaceModule
 
+from dace.transformation.dataflow import RedundantSecondArray
 from tests.utils import torch_tensors_close
 
 

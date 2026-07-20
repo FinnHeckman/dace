@@ -1,7 +1,9 @@
 # Copyright 2019-2022 ETH Zurich and the DaCe authors. All rights reserved.
 import dace
+import tempfile
 import math
 import copy
+import numpy as np
 
 from typing import Generator, Dict, List, Tuple
 from collections import Counter

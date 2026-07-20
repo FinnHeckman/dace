@@ -6,7 +6,8 @@ import copy
 from dace.symbolic import symstr
 import warnings
 
-from dace import data, symbolic, subsets
+from dace import data, dtypes, registry, symbolic, subsets
+from dace.frontend.operations import detect_reduction_type
 from dace.properties import SymbolicProperty, make_properties, Property
 from dace.sdfg import nodes
 from dace.sdfg import SDFG

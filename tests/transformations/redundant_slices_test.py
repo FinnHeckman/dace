@@ -6,7 +6,8 @@ import pytest
 
 import dace
 from dace import data, nodes
-from dace.transformation.dataflow import RedundantReadSlice, RedundantWriteSlice
+from dace.transformation.dataflow import RedundantReadSlice, RedundantWriteSlice, RemoveSliceView
+from dace.transformation.interstate import InlineMultistateSDFG, InlineSDFG, StateFusion
 from dace.sdfg import utils as sdutil
 
 

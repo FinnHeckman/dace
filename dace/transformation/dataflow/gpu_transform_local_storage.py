@@ -5,11 +5,12 @@
 import copy
 import collections
 
-from dace import data, dtypes, sdfg as sd, subsets as sbs, symbolic
+from dace import data, dtypes, registry, sdfg as sd, subsets as sbs, symbolic
 from dace.sdfg import nodes, SDFGState
 from dace.sdfg import utils as sdutil
 from dace.transformation import transformation
 from dace.properties import Property, make_properties
+from dace.config import Config
 
 
 def in_scope(graph, node, parent):
@@ -411,7 +412,7 @@ class GPUTransformLocalStorage(transformation.SingleStateTransformation):
 
                     if self.fullcopy:
                         edge.data.subset = sbs.Range.from_array(node.desc(sdfg))
-                    edge.data.other_subset = copy.deepcopy(newmemlet.subset)
+                    edge.data.other_subset = newmemlet.subset
                     graph.add_edge(edge.src, edge.src_conn, node, None, edge.data)
                     graph.remove_edge(edge)
 
@@ -490,7 +491,7 @@ class GPUTransformLocalStorage(transformation.SingleStateTransformation):
                     edge.data.wcr = None
                     if self.fullcopy:
                         edge.data.subset = sbs.Range.from_array(node.desc(sdfg))
-                    edge.data.other_subset = copy.deepcopy(newmemlet.subset)
+                    edge.data.other_subset = newmemlet.subset
                     graph.add_edge(node, None, edge.dst, edge.dst_conn, edge.data)
                     graph.remove_edge(edge)
 

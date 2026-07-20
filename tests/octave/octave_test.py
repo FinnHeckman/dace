@@ -1,3 +1,4 @@
+import dace
 from dace.cli import dacelab
 import os
 import pytest

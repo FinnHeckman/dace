@@ -6,11 +6,11 @@ with Intel MKL and NVIDIA CUBLAS.
 import click
 import dace
 import numpy as np
-from typing import Tuple
+from typing import List, Tuple
 
 # For optimizations
-from dace.transformation.dataflow import (DoubleBuffering, MapCollapse, MapReduceFusion, InLocalStorage,
-                                          AccumulateTransient, Vectorization)
+from dace.transformation.dataflow import (DoubleBuffering, MapCollapse, MapExpansion, MapReduceFusion, StripMining,
+                                          InLocalStorage, AccumulateTransient, Vectorization)
 from dace.transformation import helpers as xfutil
 
 # For library node implementations

@@ -1,7 +1,9 @@
 # Copyright 2019-2023 ETH Zurich and the DaCe authors. All rights reserved.
 """ Simple Fortran SDFG command-line compiler. """
 
+import dace
 import os
+import sys
 import argparse
 import shutil
 from dace.frontend.fortran import fortran_parser

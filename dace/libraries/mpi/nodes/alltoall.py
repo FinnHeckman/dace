@@ -1,9 +1,10 @@
 # Copyright 2019-2023 ETH Zurich and the DaCe authors. All rights reserved.
 import dace.library
+import dace.properties
 import dace.sdfg.nodes
 from dace.transformation.transformation import ExpandTransformation
 from .. import environments
-from dace.libraries.mpi.nodes.node import MPINode, expanded_input_connectors, input_descriptor_name
+from dace.libraries.mpi.nodes.node import MPINode
 
 
 @dace.library.expansion
@@ -21,9 +22,8 @@ class ExpandAlltoallMPI(ExpandTransformation):
             raise (NotImplementedError)
 
         comm = "MPI_COMM_WORLD"
-        grid = input_descriptor_name(node, parent_state, '_grid')
-        if grid:
-            comm = "_grid"
+        if node.grid:
+            comm = f"__state->{node.grid}_comm"
 
         code = f"""
             int size;
@@ -34,7 +34,7 @@ class ExpandAlltoallMPI(ExpandTransformation):
                         {comm});
             """
         tasklet = dace.sdfg.nodes.Tasklet(node.name,
-                                          expanded_input_connectors(node, parent_state),
+                                          node.in_connectors,
                                           node.out_connectors,
                                           code,
                                           language=dace.dtypes.Language.CPP)
@@ -50,8 +50,11 @@ class Alltoall(MPINode):
     }
     default_implementation = "MPI"
 
-    def __init__(self, name, *args, **kwargs):
+    grid = dace.properties.Property(dtype=str, allow_none=True, default=None)
+
+    def __init__(self, name, grid=None, *args, **kwargs):
         super().__init__(name, *args, inputs={"_inbuffer"}, outputs={"_outbuffer"}, **kwargs)
+        self.grid = grid
 
     def validate(self, sdfg, state):
         """

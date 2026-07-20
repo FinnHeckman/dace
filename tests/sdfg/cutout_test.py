@@ -1,7 +1,8 @@
 # Copyright 2019-2022 ETH Zurich and the DaCe authors. All rights reserved.
 import numpy as np
 import dace
-from dace.sdfg.analysis.cutout import SDFGCutout
+from dace.sdfg.analysis.cutout import SDFGCutout, _reduce_in_configuration
+import pytest
 
 
 def test_cutout_onenode():

@@ -25,6 +25,8 @@ capabilities DaCe provides by default.
     :maxdepth: 1
 
     parsing
-    preprocessing
     pysupport
     npsupport
+
+
+..  preprocessing

@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Dict, Optional
 from urllib.parse import urlparse
 import dace
+import shutil
 
 
 class TransformationRepoManager:

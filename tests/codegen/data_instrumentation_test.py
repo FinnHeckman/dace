@@ -1,5 +1,5 @@
 # Copyright 2019-2022 ETH Zurich and the DaCe authors. All rights reserved.
-from typing import Optional
+from typing import Optional, Tuple
 import dace
 from dace import nodes
 from dace.properties import CodeBlock

@@ -1,11 +1,12 @@
 # Copyright 2019-2025 ETH Zurich and the DaCe authors. All rights reserved.
 """ DaCe Python parsing functionality and entry point to Python frontend. """
+from dataclasses import dataclass
 import collections
 import itertools
 import tempfile
 import copy
 import os
-from typing import Any, Callable, Dict, OrderedDict, List, Optional, Set, Tuple, Union
+from typing import Any, Callable, Dict, OrderedDict, List, Optional, Set, Sequence, Tuple, Union
 
 # Try importing ML dependencies
 try:
@@ -28,6 +29,7 @@ except ImportError:
     onnx = None
     ONNX_AVAILABLE = False
 
+import dace
 from dace import config, data
 from dace.codegen import compiled_sdfg
 from dace.sdfg import SDFG, nodes

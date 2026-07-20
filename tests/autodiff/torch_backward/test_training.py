@@ -1,5 +1,9 @@
 # Copyright 2019-2025 ETH Zurich and the DaCe authors. All rights reserved.
+import os
+import copy
 import pytest
+
+import numpy as np
 
 pytest.importorskip("torch", reason="PyTorch not installed. Please install with: pip install dace[ml]")
 pytest.importorskip("transformers",

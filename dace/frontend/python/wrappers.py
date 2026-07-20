@@ -5,7 +5,7 @@ import itertools
 from collections import deque
 from typing import Deque, Generic, Type, TypeVar
 
-from dace import dtypes
+from dace import dtypes, symbolic
 
 T = TypeVar('T')
 

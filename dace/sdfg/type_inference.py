@@ -15,6 +15,7 @@ from dace.symbolic import symbol, SymExpr, symstr
 import sympy
 import sys
 import dace.frontend.python.astutils
+import inspect
 from typing import Callable, Union
 
 # Additional function names that can be used to infer types
@@ -108,21 +109,10 @@ def infer_expr_type(code, symbols=None):
         if code.name in symbols:
             return symbols[code.name]
         return code.dtype
-    elif isinstance(code, symbolic.TypedConstant):
-        return code.dtype
     elif isinstance(code, sympy.Basic):
-        has_typed_constant = any(isinstance(node, symbolic.TypedConstant) for node in sympy.preorder_traversal(code))
-        if has_typed_constant:
-            parsed_ast = ast.parse(symstr(code))
-        else:
-            parsed_ast = ast.parse(sympy.printing.pycode(code, allow_unknown_functions=True))
+        parsed_ast = ast.parse(sympy.printing.pycode(code, allow_unknown_functions=True))
     elif isinstance(code, SymExpr):
-        has_typed_constant = any(
-            isinstance(node, symbolic.TypedConstant) for node in sympy.preorder_traversal(code.expr))
-        if has_typed_constant:
-            parsed_ast = ast.parse(symstr(code.expr))
-        else:
-            parsed_ast = ast.parse(sympy.printing.pycode(code.expr, allow_unknown_functions=True))
+        parsed_ast = ast.parse(sympy.printing.pycode(code.expr, allow_unknown_functions=True))
     else:
         raise TypeError(f"Cannot convert type {type(code)} to a Python AST.")
 

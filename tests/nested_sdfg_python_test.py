@@ -2,6 +2,8 @@
 import numpy as np
 
 import dace as dp
+from dace.sdfg import SDFG
+from dace.memlet import Memlet
 
 N = dp.symbol('N')
 

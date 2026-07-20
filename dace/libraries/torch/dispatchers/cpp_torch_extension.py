@@ -1,11 +1,14 @@
 # Copyright 2019-2025 ETH Zurich and the DaCe authors. All rights reserved.
 """Code generation for PyTorch C++ dispatched operators."""
 import copy
+import dataclasses
+from distutils import sysconfig
 import hashlib
 import itertools
 import operator
 import os
-from typing import List, Tuple, Optional, Dict
+import sys
+from typing import List, Tuple, Callable, Optional, Dict, Union
 
 import dace.library
 import numpy as np

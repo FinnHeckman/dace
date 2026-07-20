@@ -53,7 +53,8 @@ If you use DaCe, cite us:
    setup/integration
    ide/cli
    general/glossary
-   general/faq
+
+.. general/faq
 
 .. toctree::
    :caption: Developer Guide
@@ -63,16 +64,9 @@ If you use DaCe, cite us:
    general/debugging
    extensions/properties
    sdfg/transforming
-   sdfg/schedule_tree
    frontend/python
    codegen/codegen
    extensions/extensions
-   extensions/libraries
-   extensions/symbolic
-   extensions/frontend
-   extensions/sdfgconvertible
-   extensions/backend
-   extensions/instrumentation
    general/errors
 
 .. toctree::

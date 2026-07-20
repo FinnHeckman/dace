@@ -1,4 +1,5 @@
 import dace
+import copy
 
 
 def test_argument_signature_test():
@@ -189,7 +190,7 @@ def test_argument_signature_test():
 
     # If we have cupy we will also compile it.
     try:
-        import cupy as cp  # noqa: F401
+        import cupy as cp
     except ImportError:
         return
 

@@ -2,13 +2,14 @@
 """ Contains classes that implement the map-expansion transformation. """
 
 from dace.sdfg.utils import consolidate_edges
-from typing import List
+from typing import Dict, List
 import copy
 import dace
 from dace import dtypes, subsets, symbolic
 from dace.properties import EnumProperty, make_properties, Property
 from dace.sdfg import nodes
 from dace.sdfg import utils as sdutil
+from dace.sdfg.graph import OrderedMultiDiConnectorGraph
 from dace.transformation import transformation as pm
 from dace.sdfg.propagation import propagate_memlets_scope
 

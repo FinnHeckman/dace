@@ -1,7 +1,9 @@
 # Copyright 2019-2025 ETH Zurich and the DaCe authors. All rights reserved.
 from typing import List
 import dace
+import numpy as np
 from dace.transformation.dataflow import MapTiling
+import pytest
 
 N = dace.symbol('N')
 

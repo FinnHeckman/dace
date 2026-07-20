@@ -3,7 +3,8 @@
     subclasses and values can be registered externally. """
 
 from dace import attr_enum
-from typing import Dict, Type, TypeVar
+from enum import Enum
+from typing import Dict, Type, TypeVar, TYPE_CHECKING
 
 T = TypeVar('T')
 E = TypeVar('E', bound=attr_enum.ExtensibleAttributeEnum)

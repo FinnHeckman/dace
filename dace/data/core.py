@@ -11,7 +11,6 @@ import ctypes
 import dataclasses
 
 from collections import OrderedDict
-from numbers import Integral
 from typing import Any, Dict, List, Set, Tuple, Union
 
 import numpy as np
@@ -90,8 +89,7 @@ class Data:
     # class can call `_validate()` without calling the subclasses'
     # `validate` function.
     def _validate(self):
-        if any(not isinstance(s, (Integral, symbolic.SymExpr, symbolic.symbol, symbolic.sympy.Basic))
-               for s in self.shape):
+        if any(not isinstance(s, (int, symbolic.SymExpr, symbolic.symbol, symbolic.sympy.Basic)) for s in self.shape):
             raise TypeError('Shape must be a list or tuple of integer values '
                             'or symbols')
         if any((shp < 0) == True for shp in self.shape):
@@ -530,10 +528,9 @@ class Array(Data):
         if len(self.offset) != len(self.shape):
             raise TypeError('Offset must be the same size as shape')
 
-        if any(not isinstance(s, (Integral, symbolic.SymExpr, symbolic.symbol, symbolic.sympy.Basic))
-               for s in self.strides):
+        if any(not isinstance(s, (int, symbolic.SymExpr, symbolic.symbol, symbolic.sympy.Basic)) for s in self.strides):
             raise TypeError('Strides must be a list or tuple of integer values or symbols')
-        if any(not isinstance(off, (Integral, symbolic.SymExpr, symbolic.symbol, symbolic.sympy.Basic))
+        if any(not isinstance(off, (int, symbolic.SymExpr, symbolic.symbol, symbolic.sympy.Basic))
                for off in self.offset):
             raise TypeError('Offset must be a list or tuple of integer values or symbols')
 
@@ -639,7 +636,7 @@ class Array(Data):
         """
         Used to set properties which depend on the shape of the array
         either to their default value, which depends on the shape, or
-        if explicitly provided to the given value. For internal use only.
+        if explicitely provided to the given value. For internal use only.
         """
         if shape is None:
             raise IndexError('Shape must not be None')
@@ -776,7 +773,7 @@ class Stream(Data):
     """ Stream (or stream array) data descriptor. """
 
     # Properties
-    offset = ListProperty(element_type=sp.Basic)
+    offset = ListProperty(element_type=symbolic.pystr_to_symbolic)
     buffer_size = SymbolicProperty(desc="Size of internal buffer.", default=0)
 
     def __init__(self,

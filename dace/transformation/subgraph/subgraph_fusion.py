@@ -18,6 +18,8 @@ from copy import deepcopy as dcpy
 from typing import List, Tuple
 import warnings
 
+import dace.libraries.standard as stdlib
+
 from collections import defaultdict
 from itertools import chain
 

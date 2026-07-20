@@ -1,9 +1,11 @@
 # Copyright 2019-2021 ETH Zurich and the DaCe authors. All rights reserved.
-from typing import Tuple
+from typing import Any, Union, Tuple, Type, Optional, List
 
+import numpy as np
 import pytest
 
 import dace
+from dace import SDFG, SDFGState
 from dace.sdfg import nodes
 from dace.transformation import dataflow as dftrans
 

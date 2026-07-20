@@ -2,8 +2,10 @@
 # Copyright 2019-2025 ETH Zurich and the DaCe authors. All rights reserved.
 
 import pytest
+import numpy as np
 import sympy
 
+import dace
 from dace import symbolic
 
 

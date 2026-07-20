@@ -5,7 +5,8 @@ import dace.properties
 import dace.sdfg.nodes
 from dace.transformation.transformation import ExpandTransformation
 from .. import environments
-from dace import dtypes
+from dace import data as dt, dtypes, memlet as mm, SDFG, SDFGState, symbolic
+from dace.frontend.common import op_repository as oprepo
 from dace.libraries.blas import environments as blas_environments
 from dace.libraries.blas import blas_helpers
 

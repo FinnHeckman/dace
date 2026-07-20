@@ -2,6 +2,7 @@
 import pytest
 import dace
 import numpy as np
+import sympy as sp
 
 
 def _construct_graph(tbsize_1=None, tbsize_2=None) -> dace.SDFG:

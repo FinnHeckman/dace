@@ -2,6 +2,8 @@
 import dace
 import numpy as np
 
+import dace.transformation.helpers as xfh
+
 M = dace.symbol('M')
 K = dace.symbol('K')
 N = dace.symbol('N')

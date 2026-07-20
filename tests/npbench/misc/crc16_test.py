@@ -2,6 +2,7 @@
 # Original application code: NPBench - https://github.com/spcl/npbench
 import dace.dtypes
 import numpy as np
+import dace as dc
 import pytest
 import argparse
 from dace.transformation.auto.auto_optimize import auto_optimize
